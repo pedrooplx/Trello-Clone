@@ -1,15 +1,33 @@
 const initalState = [
     {
-        title: "Last Episode",
+        title: "Primeira lista",
         id: 0,
         cards: [
             {
                 id: 0,
-                text: "texto qualuqer teste"
+                text: "card 1"
             },
             {
                 id: 1,
-                text: "segundo card teste"
+                text: "card 2"
+            }
+        ]
+    },
+    {
+        title: "Segunda Lista",
+        id: 1,
+        cards: [
+            {
+                id: 0,
+                text: "card 3"
+            },
+            {
+                id: 1,
+                text: "card 4"
+            },
+            {
+                id: 2,
+                text: "card 5"
             }
         ]
     }

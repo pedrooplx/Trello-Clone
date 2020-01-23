@@ -1,21 +1,22 @@
 import React from 'react';
 import PlannerCard from './plannerCard';
 
-const PlannerList = ({title}) => {
+const PlannerList = ({title, cards}) => {
     return (
         <div style={styles.container}>
             <h4>{title}</h4>
-            <PlannerCard/>
+            {cards.map(card => (<PlannerCard text={card.text} />))}
         </div>    
     )
 }
 
 const styles = {
     container:{
-        backgroundColor: "#ccc",
+        backgroundColor: "#dfe3e6",
         borderRadius: 3,
         width: 300,
-        padding: 8
+        padding: 8,
+        marginRight: 8
     }
 }
 

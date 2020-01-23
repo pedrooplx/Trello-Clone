@@ -9,10 +9,19 @@ export class App extends React.Component {
 
     return (
       <div className="App">
-        <h2>Hello Planner clone</h2>
-        {lists.map(list => (<PlannerList title={list.title} cards={list.cards} /> ))}
+        <h2>Planner - Trello clone</h2>
+        <div style={styles.listContainer}>
+          {lists.map(list => (<PlannerList title={list.title} cards={list.cards} /> ))}
+        </div>
       </div>
     )
+  }
+}
+
+const styles = {
+  listContainer: {
+    display: "flex",
+    flexDirection: "row"
   }
 }
 
