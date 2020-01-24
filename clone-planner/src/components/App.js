@@ -3,12 +3,33 @@ import PlannerList from './plannerList';
 import { connect } from 'react-redux';
 import PlannerActionButton from './plannerActionButton';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { sort } from '../actions';
+import styled from 'styled-components';
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: row
+`;
 
 export class App extends React.Component {
 
-  onDragEnd = () => {
-    //TODO: Reordering logic
-  }
+  onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    if(!destination) {
+      return;
+    }
+
+    this.props.dispatch(
+      sort(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId
+      )
+    );
+  };
 
   render() {
 
@@ -18,20 +39,13 @@ export class App extends React.Component {
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
           <h2>Planner - Trello clone</h2>
-          <div style={styles.listContainer}>
+          <ListContainer>
             {lists.map(list => (<PlannerList listID={list.id} key={list.id} title={list.title} cards={list.cards} /> ))}
             <PlannerActionButton list/>
-          </div>
+          </ListContainer>
         </div>
       </DragDropContext>
     )
-  }
-}
-
-const styles = {
-  listContainer: {
-    display: "flex",
-    flexDirection: "row"
   }
 }
 
