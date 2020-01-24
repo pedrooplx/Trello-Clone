@@ -2,20 +2,28 @@ import React from 'react';
 import PlannerList from './plannerList';
 import { connect } from 'react-redux';
 import PlannerActionButton from './plannerActionButton';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 export class App extends React.Component {
+
+  onDragEnd = () => {
+    //TODO: Reordering logic
+  }
+
   render() {
 
     const { lists } = this.props;
 
     return (
-      <div className="App">
-        <h2>Planner - Trello clone</h2>
-        <div style={styles.listContainer}>
-          {lists.map(list => (<PlannerList listID={list.id} key={list.id} title={list.title} cards={list.cards} /> ))}
-          <PlannerActionButton list/>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div>
+          <h2>Planner - Trello clone</h2>
+          <div style={styles.listContainer}>
+            {lists.map(list => (<PlannerList listID={list.id} key={list.id} title={list.title} cards={list.cards} /> ))}
+            <PlannerActionButton list/>
+          </div>
         </div>
-      </div>
+      </DragDropContext>
     )
   }
 }
