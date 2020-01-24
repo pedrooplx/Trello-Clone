@@ -2,12 +2,12 @@ import React from 'react';
 import PlannerCard from './plannerCard';
 import PlannerActionButton from './plannerActionButton'
 
-const PlannerList = ({title, cards}) => {
+const PlannerList = ({title, cards, listID}) => {
     return (
         <div style={styles.container}>
             <h4>{title}</h4>
             {cards.map(card => (<PlannerCard key={card.id} text={card.text} />))}
-            <PlannerActionButton />
+            <PlannerActionButton listID={listID}/>
         </div>    
     )
 }

@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 const PlannerCard = ({text}) => {
     return(
         <Card style={styles.cardContainer}>
-            <CardContent>
+            <CardContent style={{ paddingBottom:10 }}>
                 <Typography gutterBottom> {text} </Typography>               
             </CardContent>
         </Card>

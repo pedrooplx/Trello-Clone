@@ -12,7 +12,7 @@ export class App extends React.Component {
       <div className="App">
         <h2>Planner - Trello clone</h2>
         <div style={styles.listContainer}>
-          {lists.map(list => (<PlannerList key={list.id} title={list.title} cards={list.cards} /> ))}
+          {lists.map(list => (<PlannerList listID={list.id} key={list.id} title={list.title} cards={list.cards} /> ))}
           <PlannerActionButton list/>
         </div>
       </div>

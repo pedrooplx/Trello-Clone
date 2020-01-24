@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Icon from '@material-ui/core/Icon';
 import { Card, TextareaAutosize, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { addList, addCard } from '../actions';
 
 export class PlannerActionButton extends Component {
 
@@ -29,6 +31,32 @@ export class PlannerActionButton extends Component {
         })
     }
 
+    handleAddList = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+
+        if(text){
+            this.setState({
+                text: ""
+            })
+            dispatch(addList(text));
+        }
+
+        return;
+    }
+
+    handleAddCard = () => {
+        const { dispatch, listID } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            this.setState({
+                text: ""
+            })
+            dispatch(addCard(listID, text))
+        }
+    }
+
     renderAddButton = () => {
         const { list } = this.props;
 
@@ -38,7 +66,7 @@ export class PlannerActionButton extends Component {
         const buttonTextBackground = list ? "rgba(0,0,0,.15" : "inherit";
 
         return(
-            <div onClick={this.openForm} style={{...styles.openFormButtonGroup, opacity: buttonTextOpacity, color: buttonTextColor, background: buttonTextBackground}}>
+            <div onClick={this.openForm} style={{...styles.openFormButtonGroup, paddingBottom: 10,opacity: buttonTextOpacity, color: buttonTextColor, background: buttonTextBackground}}>
                 <Icon style={{marginTop: 12, paddingRight:5}}>add</Icon>
                 <p>{buttonText}</p>
             </div>
@@ -57,7 +85,8 @@ export class PlannerActionButton extends Component {
                 <TextareaAutosize placeholder={placeholder} autoFocus onBlur={this.closeForm} value={this.state.text} onChange={this.handleInputChange} style={styles.textareaStyle} />
             </Card>
             <div style={styles.formButtonGroup}>
-                <Button variant="contained" style={styles.buttonSave}>{buttonTitle}</Button>
+                {/* Deve ser onMouseDown pq no textarea tem onBlur, onClick não funcionaria */}
+                <Button onMouseDown={list ? this.handleAddList : this.handleAddCard} variant="contained" style={styles.buttonSave}>{buttonTitle}</Button>
                 <Icon style={{ marginLeft: 8, cursor: "pointer", marginTop: 6 }}>close</Icon>
             </div>
         </div>
@@ -102,4 +131,4 @@ const styles = {
     }
 };
 
-export default PlannerActionButton
+export default connect() (PlannerActionButton);
