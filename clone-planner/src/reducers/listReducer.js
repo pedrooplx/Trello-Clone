@@ -1,5 +1,4 @@
 import { CONSTANTS } from '../actions';
-import { Droppable } from 'react-beautiful-dnd';
 
 let listID = 4;
 let cardID = 8
@@ -95,15 +94,35 @@ const listReducer = (state = initalState, action) => {
                 droppableIdEnd,
                 droppableIndexStart,
                 droppableIndexEnd,
-                droppableId
+                draggableId,
+                type
             } = action.payload;
             const newState = [...state];
 
-            //Na mesma lista
+            //Arrastando a lista
+            if(type === "list"){
+                const list = newState.splice(droppableIndexStart, 1);
+                newState.splice(droppableIndexEnd, 0, ...list);
+                return newState;
+            }
+
+            //Ação de movimentar cards na mesma lista
             if(droppableIdStart === droppableIdEnd){
                 const list = state.find(list => droppableIdStart === list.id)
                 const card = list.cards.splice(droppableIndexStart, 1)
                 list.cards.splice(droppableIndexEnd, 0, ...card)
+            }
+
+            //Ação de movimentar cards para outras listas
+            if(droppableIdStart !== droppableIdEnd){
+                //Achar a lista onde o arrasto aconteceu
+                const listStart = state.find(list => droppableIdStart === list.id);
+                //Retirar o cartão da lista
+                const card = listStart.cards.splice(droppableIdStart, 1);
+                //Achar a lista que o arrastro vai acabar
+                const listEnd = state.find(list => droppableIdEnd === list.id);
+                //Colocar o card na nova lista
+                listEnd.cards.splice(droppableIndexEnd, 0, ...card);
             }
 
             return newState;

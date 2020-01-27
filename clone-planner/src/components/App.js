@@ -2,7 +2,7 @@ import React from 'react';
 import PlannerList from './plannerList';
 import { connect } from 'react-redux';
 import PlannerActionButton from './plannerActionButton';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ const ListContainer = styled.div`
 export class App extends React.Component {
 
   onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if(!destination) {
       return;
@@ -26,7 +26,8 @@ export class App extends React.Component {
         destination.droppableId,
         source.index,
         destination.index,
-        draggableId
+        draggableId,
+        type
       )
     );
   };
@@ -39,10 +40,14 @@ export class App extends React.Component {
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
           <h2>Planner - Trello clone</h2>
-          <ListContainer>
-            {lists.map(list => (<PlannerList listID={list.id} key={list.id} title={list.title} cards={list.cards} /> ))}
-            <PlannerActionButton list/>
-          </ListContainer>
+          <Droppable droppableId="all-lists" direction="horizontal" type="list">
+            {provided => (
+              <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+                {lists.map((list, index) => (<PlannerList listID={list.id} key={list.id} title={list.title} cards={list.cards} index={index} /> ))}
+                <PlannerActionButton list/>
+              </ListContainer>
+            )}
+          </Droppable>
         </div>
       </DragDropContext>
     )
