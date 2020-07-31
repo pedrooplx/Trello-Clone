@@ -6,6 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
 import styled from 'styled-components';
 
+
 const ListContainer = styled.div`
   display: flex;
   flex-direction: row
@@ -39,7 +40,7 @@ export class App extends React.Component {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div>
-          <h2>Planner - Trello clone</h2>
+          <h2 style={styles.defaultLabel}>Planner - Trello clone</h2>
           <Droppable droppableId="all-lists" direction="horizontal" type="list">
             {provided => (
               <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
@@ -57,5 +58,15 @@ export class App extends React.Component {
 const maspStateToProps = state => ({
   lists: state.lists
 })
+
+const styles = {
+  defaultLabel:{
+    fontSize: "2rem",
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    fontWeight: 800,
+    lineHeight: 1.5,
+    letterSpacing: "0.00938em"
+  }
+}
 
 export default connect(maspStateToProps)(App);

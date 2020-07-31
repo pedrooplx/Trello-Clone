@@ -21,7 +21,7 @@ const PlannerList = ({title, cards, listID, index}) => {
                     <Droppable droppableId={String(listID)}>
                         { provided => (
                             <div {...provided.droppableProps} ref={provided.innerRef}>
-                                <h4>{title}</h4>
+                                <h4 style={styles.defaultCardTitle}>{title}</h4>
                                 {cards.map((card, index) => (<PlannerCard key={card.id} index={index} text={card.text} id={card.id} />))}
                                 <PlannerActionButton listID={listID}/>
                                 {provided.placeholder}
@@ -33,5 +33,15 @@ const PlannerList = ({title, cards, listID, index}) => {
         </Draggable>  
     )
 }
+
+const styles = {
+    defaultCardTitle:{
+      fontSize: "1rem",
+      fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+      fontWeight: 600,
+      lineHeight: 1.5,
+      letterSpacing: "0.00938em"
+    }
+  }
 
 export default PlannerList;

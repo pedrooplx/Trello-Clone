@@ -61,12 +61,11 @@ export class PlannerActionButton extends Component {
         const { list } = this.props;
 
         const buttonText = list ? "Adicionar nova lista" : "Adicionar novo card";
-        const buttonTextOpacity = list ? 1 : 0.5;
-        const buttonTextColor = list ? "white" : "inherit";
-        const buttonTextBackground = list ? "rgba(0,0,0,.15" : "inherit";
+        const buttonTextBackground = list ? "rgb(223 227 230)" : "inherit";
+        const buttonFontFamily = "Roboto, Helvetica, Arial, sans-serif";
 
         return(
-            <div onClick={this.openForm} style={{...styles.openFormButtonGroup, paddingBottom: 10,opacity: buttonTextOpacity, color: buttonTextColor, background: buttonTextBackground}}>
+            <div onClick={this.openForm} style={{...styles.openFormButtonGroup, paddingBottom: 10, color: "rgb(53,52,52,1)", fontFamily: buttonFontFamily, background: buttonTextBackground}}>
                 <Icon style={{marginTop: 12, paddingRight:5}}>add</Icon>
                 <p>{buttonText}</p>
             </div>
