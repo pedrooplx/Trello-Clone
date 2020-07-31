@@ -32,4 +32,5 @@ Lista de ferramentas e bibliotecas ultilizadas:
     * DragDropContext
     * DragDropContext
     
-![npm version](https://img.shields.io/badge/-2.0.2-grey?style=flat-square&logo=NPM&logoColor=grey&link=https://www.npmjs.com/package/npm/v/2.0.2)
+[![npm version](https://img.shields.io/badge/-2.0.2-grey?style=flat-square&logo=NPM&logoColor=grey&link=https://www.npmjs.com/package/npm/v/2.0.2)](https://www.npmjs.com/package/npm/v/2.0.2)
+
