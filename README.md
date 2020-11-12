@@ -1,5 +1,4 @@
 # Planner
-> "Planner", Trello Clone.
 
 Desenvolvi esse projeto com o propósito de aperfeiçoar minhas habilidades em front-end usando ReactJS, Redux, JavaScript, CSS dentre outras bibliotecas.<br />
 Esse projeto é baseado no [Trello](https://trello.com/), uma plataforma de gerenciamento de projeto.
